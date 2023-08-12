@@ -49,7 +49,6 @@ sudo docker run -it --rm --name ffmpeg -v .:/config -w /config harbor.hosts.song
 > 如果文件很多，可以
 ```
 bash ffmpeg_cmd_list
-
 ```
 
 ## 腾讯视频
