@@ -1,0 +1,58 @@
+docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3 python your-daemon-or-script.py
+
+sudo docker run -it --rm --name parse_file_name -v .:/work -w /work harbor.hosts.songhu.wang:8443/apps/python:alpine3.18_v2023-08-09 python parse_file_name.py .
+
+sudo docker run -it --rm --name ffmpeg -v .:/config -w /config harbor.hosts.songhu.wang:8443/apps/linuxserver/ffmpeg:amd64-version-6.0-cli_v2023-08-09 -i s_6038/103591/80/audio.m4s -i s_6038/103591/80/video.m4s -vcodec copy -acodec copy "[1.][BV1wx411Q7kh][风灵玉秀·夜探][1080P].mkv"
+
+Basic Transcode
+
+docker run --rm -it \
+  -v $(pwd):/config \
+  linuxserver/ffmpeg \
+  -i /config/input.mkv \
+  -c:v libx264 \
+  -b:v 4M \
+  -vf scale=1280:720 \
+  -c:a copy \
+  /config/output.mkv
+
+Hardware accelerated (VAAPI) (click for more info)
+
+docker run --rm -it \
+  --device=/dev/dri:/dev/dri \
+  -v $(pwd):/config \
+  linuxserver/ffmpeg \
+  -vaapi_device /dev/dri/renderD128 \
+  -i /config/input.mkv \
+  -c:v h264_vaapi \
+  -b:v 4M \
+  -vf 'format=nv12|vaapi,hwupload,scale_vaapi=w=1280:h=720' \
+  -c:a copy \
+  /config/output.mkv
+
+Hardware accelerated (QSV) (click for more info)
+
+docker run --rm -it \
+  --device=/dev/dri:/dev/dri \
+  -v $(pwd):/config \
+  linuxserver/ffmpeg \
+  -hwaccel qsv \
+  -c:v h264_qsv \
+  -i /config/input.mkv \
+  -c:v h264_qsv \
+  -global_quality 25 \
+  /config/output.mkv
+
+Nvidia Hardware accelerated (click for more info)
+
+docker run --rm -it \
+  --runtime=nvidia \
+  -v $(pwd):/config \
+  linuxserver/ffmpeg \
+  -hwaccel nvdec \
+  -i /config/input.mkv \
+  -c:v h264_nvenc \
+  -b:v 4M \
+  -vf scale=1280:720 \
+  -c:a copy \
+  /config/output.mkv
