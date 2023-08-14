@@ -14,7 +14,7 @@ if __name__ == '__main__':
     for item in file_list:
         with open(item, encoding='utf-8', mode='r') as f:
             jdata = json.load(f)
-            title = jdata['title']
+            title = jdata['title'].replace('/', '')
             video_quality = str(jdata['video_quality'])
             quality_pithy_description = jdata['quality_pithy_description']
             page_index = jdata['page_data']['page']
