@@ -39,13 +39,13 @@
 如果是番剧使用：
 
 ```
-sudo docker run -it --rm --name parse_file_name -v .:/work -w /work harbor.hosts.songhu.wang:8443/apps/python:alpine3.18_v2023-08-09 python parse_file_name.py .
+sudo docker run -it --rm --name parse_file_name -v `pwd`:/work -w /work harbor.hosts.songhu.wang:8443/apps/python:alpine3.18_v2023-08-09 python parse_file_name.py .
 ```
 
 如果是up上传的合集，则使用:
 
 ```
-sudo docker run -it --rm --name parse_file_name -v .:/work -w /work harbor.hosts.songhu.wang:8443/apps/python:alpine3.18_v2023-08-09 python parse_file_name_page.py .
+sudo docker run -it --rm --name parse_file_name -v `pwd`:/work -w /work harbor.hosts.songhu.wang:8443/apps/python:alpine3.18_v2023-08-09 python parse_file_name_page.py .
 ```
 
 > 生成的命令在`ffmpeg_cmd_list`
@@ -53,7 +53,7 @@ sudo docker run -it --rm --name parse_file_name -v .:/work -w /work harbor.hosts
 2. 执行生成ffmpeg视频合并命令
 
 ```
-sudo docker run -it --rm --name ffmpeg -v .:/config -w /config harbor.hosts.songhu.wang:8443/apps/linuxserver/ffmpeg:amd64-version-6.0-cli_v2023-08-09 -i s_6038/103591/80/audio.m4s -i s_6038/103591/80/video.m4s -vcodec copy -acodec copy "[1.][BV1wx411Q7kh][风灵玉秀·夜探][1080P].mkv"
+sudo docker run -it --rm --name ffmpeg -v `pwd`:/config -w /config harbor.hosts.songhu.wang:8443/apps/linuxserver/ffmpeg:amd64-version-6.0-cli_v2023-08-09 -i s_6038/103591/80/audio.m4s -i s_6038/103591/80/video.m4s -vcodec copy -acodec copy "[1.][BV1wx411Q7kh][风灵玉秀·夜探][1080P].mkv"
 ```
 
 

@@ -24,4 +24,4 @@ if __name__ == '__main__':
             audio_file = media_file_path+'/'+video_quality+'/'+'audio.m4s'
             video_file = media_file_path+'/'+video_quality+'/'+'video.m4s'
             with open(ffmpeg_cmd_list, encoding='utf-8', mode='a+') as fp:
-                print('sudo docker run -it --rm --name ffmpeg -v .:/config -w /config harbor.hosts.songhu.wang:8443/apps/linuxserver/ffmpeg:amd64-version-6.0-cli_v2023-08-09 -i %s -i %s -vcodec copy -acodec copy "[%s.][%s][%s·%s][%s].mkv"' % (audio_file, video_file, page_index, page_bvid, title, page_index_title, quality_pithy_description), file=fp)
+                print('sudo docker run -it --rm --name ffmpeg -v `pwd`:/config -w /config harbor.hosts.songhu.wang:8443/apps/linuxserver/ffmpeg:amd64-version-6.0-cli_v2023-08-09 -i %s -i %s -vcodec copy -acodec copy "[%s.][%s][%s·%s][%s].mkv"' % (audio_file, video_file, page_index, page_bvid, title, page_index_title, quality_pithy_description), file=fp)
